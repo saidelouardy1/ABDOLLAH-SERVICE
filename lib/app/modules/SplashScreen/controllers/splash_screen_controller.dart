@@ -1,23 +1,43 @@
+import 'package:abdollah_srevice/app/modules/OnBordining/bindings/on_bordining_binding.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:abdollah_srevice/app/modules/OnBordining/views/on_bordining_view.dart';
+import 'package:abdollah_srevice/app/routes/app_pages.dart';
 
 class SplashScreenController extends GetxController {
-  //TODO: Implement SplashScreenController
+  var progress = 0.0.obs; 
+  final _storage = GetStorage();
+  
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
+    startProgress();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  void startProgress() {
+    progress.value = 0.0;
+    updateProgress();
   }
 
-  @override
-  void onClose() {
-    super.onClose();
+  void updateProgress() async {
+    while (progress.value < 1.0) {
+      await Future.delayed(Duration(milliseconds: 300));
+      progress.value += 0.05;
+    }
+    progress.value = 1.0;
+
+    checkOnboarding();
   }
 
-  void increment() => count.value++;
+  void checkOnboarding() {
+    bool isFirstInstallation = _storage.read('isFirstInstallation') ?? true;
+
+    if (isFirstInstallation) {
+      _storage.write('isFirstInstallation', false);
+      Get.off(() => OnBordiningView(), binding: OnBordiningBinding());
+    } else {
+      Get.offNamed(Routes.AUTHENTICATION);
+    }
+  }
 }

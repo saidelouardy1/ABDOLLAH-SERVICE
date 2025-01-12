@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/Authentication/bindings/authentication_binding.dart';
 import '../modules/Authentication/views/authentication_view.dart';
+import '../modules/OnBordining/bindings/on_bordining_binding.dart';
+import '../modules/OnBordining/views/on_bordining_view.dart';
 import '../modules/SplashScreen/bindings/splash_screen_binding.dart';
 import '../modules/SplashScreen/views/splash_screen_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -22,13 +24,18 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.SPLASH_SCREEN,
-      page: () => const SplashScreenView(),
+      page: () => SplashScreenView(),
       binding: SplashScreenBinding(),
     ),
     GetPage(
       name: _Paths.AUTHENTICATION,
       page: () => const AuthenticationView(),
       binding: AuthenticationBinding(),
+    ),
+    GetPage(
+      name: _Paths.ON_BORDINING,
+      page: () => const OnBordiningView(),
+      binding: OnBordiningBinding(),
     ),
   ];
 }

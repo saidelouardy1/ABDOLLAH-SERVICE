@@ -1,6 +1,15 @@
 
  class Fontsized {
-  static const fontsLarge = 22.00;
-  static const fontsMidume = 25.00;
-  static const fontsSmall = 25.00;
+  static const fontsLarge = 20.00;
+  static const fontsMidume = 14.00;
+  static const fontsSmall = 13.00;
+
+  static const BodyLarge = 18.00;
+  static const BodyMidume = 16.00;
+  static const BodySmall  = 10.00;
+  
+  static const SizedLarge = 23.00;
+  static const SizedMidume = 15.00;
+  static const SizedSmall = 11.00;
+
  }

@@ -1,6 +1,14 @@
 analyzer:
   errors:
+    avoid_print: ignore
+    camel_case_types: ignore
     constant_identifier_names: ignore
+    deprecated_member_use: ignore
+    must_be_immutable: ignore
+    non_constant_identifier_names: ignore
+    unnecessary_overrides: ignore
+    unused_local_variable: ignore
+    use_key_in_widget_constructors: ignore
 include: package:flutter_lints/flutter.yaml
 linter:
   rules:
