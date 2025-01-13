@@ -31,6 +31,9 @@ class TranslationApp implements Translations {
       "snackbar_email_in_use": "تم إنشاء حساب بالفعل لهذا البريد الإلكتروني.",
       "snackbar_user_not_found": "لم يتم العثور على مستخدم للبريد الإلكتروني هذا.",
       "snackbar_wrong_password": "كلمة المرور المقدمة غير صحيحة.",
+      "Success": "نجاح",
+      "info" : "معلومات" ,
+      "User successfully registered!" : "تم تسجيل المستخدم بنجاح!",
     },
     "en" : {
       "name app" : "Abdollah services",
@@ -59,6 +62,9 @@ class TranslationApp implements Translations {
       "snackbar_email_in_use": "The account already exists for that email.",
       "snackbar_user_not_found": "No user found for that email.",
       "snackbar_wrong_password": "Wrong password provided for that user.",
+      "Success": "Success",
+      "info" : "info" , 
+      "User successfully registered!" : "User successfully registered!",
     },
     "fr" : {
       "name app" : "Abdollah services",
@@ -87,6 +93,9 @@ class TranslationApp implements Translations {
       "snackbar_email_in_use": "Le compte existe déjà pour cet e-mail.",
       "snackbar_user_not_found": "Aucun utilisateur trouvé pour cet e-mail.",
       "snackbar_wrong_password": "Le mot de passe fourni est incorrect.",
+      "Success": "Succès",
+      "info" : "informations" , 
+      "User successfully registered!" : "Utilisateur enregistré avec succès!"
     }
 
   };

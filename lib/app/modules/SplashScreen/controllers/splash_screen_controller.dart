@@ -35,7 +35,7 @@ class SplashScreenController extends GetxController {
 
     if (isFirstInstallation) {
       _storage.write('isFirstInstallation', false);
-      Get.off(() => OnBordiningView(), binding: OnBordiningBinding());
+      Get.offNamed(Routes.ON_BORDINING);
     } else {
       Get.offNamed(Routes.AUTHENTICATION);
     }

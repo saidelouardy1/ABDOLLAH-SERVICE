@@ -33,143 +33,141 @@ class _SingOutState extends State<SingUp> {
           child: Container(
             width: Get.width,
             height: Get.height,
-            padding: EdgeInsets.only(top: 40, left: 15, right: 15),
+            padding: EdgeInsets.only(top:40, left: 15, right: 15),
             decoration: BoxDecoration(color: ColorApp.white_4),
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Transform.translate(
-                    offset: Offset(-10, 0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        IconButton(
-                            onPressed: () {
-                              Get.back();
-                            },
-                            icon: SvgPicture.asset(
-                              Get.locale?.languageCode == "ar"
-                                  ? Images_Icon.right
-                                  : Images_Icon.back,
-                              width: 25,
-                              height: 25,
-                            )),
-                        Text(
-                          'Sign Up'.tr,
-                          style: GoogleFonts.inter(
-                              fontWeight: FontWeight.w600,
-                              fontSize: Fontsized.fontsLarge),
-                        ),
-                      ],
-                    ),
+            child: ListView(
+              children: [
+                Transform.translate(
+                  offset: Offset(-10, 0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      IconButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          icon: SvgPicture.asset(
+                            Get.locale?.languageCode == "ar"
+                                ? Images_Icon.right
+                                : Images_Icon.back,
+                            width: 25,
+                            height: 25,
+                          )),
+                      Text(
+                        'Sign Up'.tr,
+                        style: GoogleFonts.inter(
+                            fontWeight: FontWeight.w600,
+                            fontSize: Fontsized.fontsLarge),
+                      ),
+                    ],
                   ),
-                  Form(
-                    key: formKey,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        ///////////////////////////////// fullname
-                        textFromefild("Nom Complet", "${"ex".tr} John Doe", false,
-                            (value) {
-                          if (value!.isEmpty) {
-                            return "name_empty".tr;
-                          }
-                          return null;
-                        }, authenticationController.full_name),
-                        ///////////////////////////////// email
-                        textFromefild(
-                            "Email", " ${"ex".tr} Johndoe@example.com", false,
-                            (value) {
-                          if (value!.isEmpty) {
-                            return "email_empty".tr;
-                          }else if(!authenticationController.emailValid.hasMatch(value)){
-                            return "invalid_email".tr;
-                          }
-                          return null;
-                        }, authenticationController.email),
-                        ///////////////////////////////////////////// password
-                        Obx(
-                          () => textFromefild(
-                            "Mot de passe",
-                            "••••••••",
-                            authenticationController.obscureText.value,
-                            (value) {
-                              if (value!.isEmpty) {
-                                return "password_empty".tr;
-                              }
-                              return null;
-                            },
-                            authenticationController.password,
-                            iconSvg: IconButton(
-                                highlightColor: Colors.transparent,
-                                onPressed: () {
-                                  authenticationController.toggle();
-                                  print(authenticationController.obscureText.value);
-                                },
-                                icon: SvgPicture.asset(
-                                    authenticationController.obscureText.value
-                                        ? Images_Icon.eayeClose
-                                        : Images_Icon.eayOpen)),
-                          ),
-                        ),
-                        ///////////////////////////////// confirm password
-                        Obx(
-                          () => textFromefild(
-                            "Confirmer le Mot de passe",
-                            "••••••••",
-                            authenticationController.obscureTextConferme.value,
-                            (value) {
-                              if (value!.isEmpty) {
-                                return "password_empty".tr;
-                              }
-                              if (value != authenticationController.password.text) {
-                                return "passwords_mismatch".tr;
-                              }
-                              return null;
-                            },
-                            authenticationController.ConfermPassword,
-                            iconSvg: IconButton(
-                                highlightColor: Colors.transparent,
-                                onPressed: () {
-                                  authenticationController.toggleConferme();
-                                },
-                                icon: SvgPicture.asset(authenticationController
-                                        .obscureTextConferme.value
-                                    ? Images_Icon.eayeClose
-                                    : Images_Icon.eayOpen)),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 25),
-                  ///////////////////////////////////////// sign up button
-                  Card(
-                    elevation: 4,
-                    color: Colors.white,
-                    child: MaterialButton(
-                      minWidth: Get.width,
-                      splashColor: Colors.transparent,
-                      onPressed: () async {
-                        if (formKey.currentState!.validate()) {
-                           authenticationController.signUp();
+                ),
+                SizedBox(height: 15),
+                Form(
+                  key: formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ///////////////////////////////// fullname
+                      textFromefild("Nom Complet", "${"ex".tr} John Doe", false,
+                          (value) {
+                        if (value!.isEmpty) {
+                          return "name_empty".tr;
                         }
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(15),
-                        child: Text(
-                          "Sign Up".tr,
-                          style: GoogleFonts.inter(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w700,
-                              fontSize: Fontsized.BodyLarge),
+                        return null;
+                      }, authenticationController.full_name),
+                      ///////////////////////////////// email
+                      textFromefild(
+                          "Email", " ${"ex".tr} Johndoe@example.com", false,
+                          (value) {
+                        if (value!.isEmpty) {
+                          return "email_empty".tr;
+                        }else if(!authenticationController.emailValid.hasMatch(value)){
+                          return "invalid_email".tr;
+                        }
+                        return null;
+                      }, authenticationController.email),
+                      ///////////////////////////////////////////// password
+                      Obx(
+                        () => textFromefild(
+                          "Mot de passe",
+                          "••••••••",
+                          authenticationController.obscureText.value,
+                          (value) {
+                            if (value!.isEmpty) {
+                              return "password_empty".tr;
+                            }
+                            return null;
+                          },
+                          authenticationController.password,
+                          iconSvg: IconButton(
+                              highlightColor: Colors.transparent,
+                              onPressed: () {
+                                authenticationController.toggle();
+                                print(authenticationController.obscureText.value);
+                              },
+                              icon: SvgPicture.asset(
+                                  authenticationController.obscureText.value
+                                      ? Images_Icon.eayeClose
+                                      : Images_Icon.eayOpen)),
                         ),
+                      ),
+                      ///////////////////////////////// confirm password
+                      Obx(
+                        () => textFromefild(
+                          "Confirmer le Mot de passe",
+                          "••••••••",
+                          authenticationController.obscureTextConferme.value,
+                          (value) {
+                            if (value!.isEmpty) {
+                              return "password_empty".tr;
+                            }
+                            if (value != authenticationController.password.text) {
+                              return "passwords_mismatch".tr;
+                            }
+                            return null;
+                          },
+                          authenticationController.ConfermPassword,
+                          iconSvg: IconButton(
+                              highlightColor: Colors.transparent,
+                              onPressed: () {
+                                authenticationController.toggleConferme();
+                              },
+                              icon: SvgPicture.asset(authenticationController
+                                      .obscureTextConferme.value
+                                  ? Images_Icon.eayeClose
+                                  : Images_Icon.eayOpen)),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(height: 25),
+                ///////////////////////////////////////// sign up button
+                Card(
+                  elevation: 4,
+                  color: Colors.white,
+                  child: MaterialButton(
+                    minWidth: Get.width,
+                    splashColor: Colors.transparent,
+                    onPressed: () async {
+                      if (formKey.currentState!.validate()) {
+                         authenticationController.signUp();
+                      }
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(15),
+                      child: Text(
+                        "Sign Up".tr,
+                        style: GoogleFonts.inter(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w700,
+                            fontSize: Fontsized.BodyLarge),
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
