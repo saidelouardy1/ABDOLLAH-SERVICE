@@ -160,8 +160,8 @@ class _SingInState extends State<SingIn> {
                           fontSize: Fontsized.fontsSmall,
                           color: Colors.black)),
                   SizedBox(width: 5),
-                  GestureDetector(
-                    onTap: () {
+                  TextButton(
+                    onPressed: () {
                       Get.to(() => SingUp());
                     },
                     child: Text('Create Account'.tr,
@@ -178,11 +178,12 @@ class _SingInState extends State<SingIn> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   //////////////////////////// chrome
-                  InkWell(
-                    onTap: () {
-                      print("chrome");
+                  IconButton(
+                    onPressed: () {
+                      authenticationController.signInWithGoogle();
                     },
-                    child: Card(
+                    highlightColor: Colors.transparent,
+                    icon: Card(
                       elevation: 5,
                       color: Colors.white,
                       shape: RoundedRectangleBorder(
@@ -195,11 +196,12 @@ class _SingInState extends State<SingIn> {
                     ),
                   ),
                   //////////////////////////////// facebook
-                  InkWell(
-                    onTap: () {
-                      print("facebook");
+                  IconButton(
+                    onPressed: () {
+                      authenticationController.signInWithFacebook();
                     },
-                    child: Card(
+                    highlightColor: Colors.transparent,
+                    icon: Card(
                       elevation: 5,
                       color: ColorApp.blue_1,
                       shape: RoundedRectangleBorder(
@@ -212,12 +214,13 @@ class _SingInState extends State<SingIn> {
                     ),
                   ),
                   //////////////////////// apple
-                  !Platform.isIOS
-                      ? InkWell(
-                          onTap: () {
+                  if (Platform.isIOS)
+                       IconButton(
+                          onPressed: () {
                             print("apple");
                           },
-                          child: Card(
+                          highlightColor: Colors.transparent,
+                          icon: Card(
                             elevation: 5,
                             color: Colors.black,
                             shape: RoundedRectangleBorder(
@@ -228,8 +231,7 @@ class _SingInState extends State<SingIn> {
                                 margin: EdgeInsets.all(10),
                                 child: SvgPicture.asset(Images_Icon.apple)),
                           ),
-                        )
-                      : SizedBox(),
+                        ),
                 ],
               )
             ],

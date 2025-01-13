@@ -34,6 +34,7 @@ class TranslationApp implements Translations {
       "Success": "نجاح",
       "info" : "معلومات" ,
       "User successfully registered!" : "تم تسجيل المستخدم بنجاح!",
+      "The password or email provided for this user is incorrect" : "كلمة المرور أو البريد الإلكتروني المقدم لهذا المستخدم خاطئ"
     },
     "en" : {
       "name app" : "Abdollah services",
@@ -65,6 +66,7 @@ class TranslationApp implements Translations {
       "Success": "Success",
       "info" : "info" , 
       "User successfully registered!" : "User successfully registered!",
+      "The password or email provided for this user is incorrect" : "The password or email provided for this user is incorrect."
     },
     "fr" : {
       "name app" : "Abdollah services",
@@ -95,7 +97,8 @@ class TranslationApp implements Translations {
       "snackbar_wrong_password": "Le mot de passe fourni est incorrect.",
       "Success": "Succès",
       "info" : "informations" , 
-      "User successfully registered!" : "Utilisateur enregistré avec succès!"
+      "User successfully registered!" : "Utilisateur enregistré avec succès!" , 
+      "The password or email provided for this user is incorrect" : "Le mot de passe ou l'e-mail fourni pour cet utilisateur est incorrect.",
     }
 
   };

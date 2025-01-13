@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="app_name">Abdollah_service</string>
+    <string name="facebook_app_id">616391894303076</string>
+    <string name="facebook_client_token">cdb485b329b66795af13444d4aaa8819</string>
+    <string name="fb_login_protocol_scheme">fb616391894303076</string> 
+</resources>
