@@ -82,7 +82,7 @@ class _SingOutState extends State<SingUp> {
                           (value) {
                         if (value!.isEmpty) {
                           return "email_empty".tr;
-                        }else if(!authenticationController.emailValid.hasMatch(value)){
+                        }else if(!GetUtils.isEmail(value)){
                           return "invalid_email".tr;
                         }
                         return null;

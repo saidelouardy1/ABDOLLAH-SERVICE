@@ -13,8 +13,6 @@ class AuthenticationController extends GetxController {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController ConfermPassword = TextEditingController();
-  RegExp emailValid = RegExp(
-      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
   RxBool isLoading = false.obs;
 
   ////////////////////////////////////
@@ -197,7 +195,7 @@ class AuthenticationController extends GetxController {
             'image': user.photoURL ?? '',
             'token': accessToken.tokenString,
           }, SetOptions(merge: true));
-          Get.offNamed(Routes.HOME); 
+          Get.offNamed(Routes.HOME);
         }
       } else if (loginResult.status == LoginStatus.cancelled) {
         print("Facebook sign-in was cancelled.");
@@ -207,7 +205,7 @@ class AuthenticationController extends GetxController {
       isLoading.value = false;
     } catch (e) {
       print("An error occurred: $e");
-    }finally{
+    } finally {
       isLoading.value = false;
     }
   }
@@ -215,6 +213,13 @@ class AuthenticationController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user == null) {
+        print('User is currently signed out!');
+      } else {
+        print('User is signed in!');
+      }
+    });
   }
 
   @override

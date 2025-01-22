@@ -6,6 +6,8 @@ import '../modules/OnBordining/bindings/on_bordining_binding.dart';
 import '../modules/OnBordining/views/on_bordining_view.dart';
 import '../modules/SplashScreen/bindings/splash_screen_binding.dart';
 import '../modules/SplashScreen/views/splash_screen_view.dart';
+import '../modules/Verfication/bindings/verfication_binding.dart';
+import '../modules/Verfication/views/verfication_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 
@@ -36,6 +38,11 @@ class AppPages {
       name: _Paths.ON_BORDINING,
       page: () => const OnBordiningView(),
       binding: OnBordiningBinding(),
+    ),
+    GetPage(
+      name: _Paths.VERFICATION,
+      page: () => const VerficationView(),
+      binding: VerficationBinding(),
     ),
   ];
 }

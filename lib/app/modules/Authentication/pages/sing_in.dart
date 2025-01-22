@@ -4,6 +4,7 @@ import 'package:abdollah_srevice/app/config/Size/fontsized.dart';
 import 'package:abdollah_srevice/app/config/Theme/theme.dart';
 import 'package:abdollah_srevice/app/modules/Authentication/controllers/authentication_controller.dart';
 import 'package:abdollah_srevice/app/modules/Authentication/pages/sing_up.dart';
+import 'package:abdollah_srevice/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
@@ -58,6 +59,8 @@ class _SingInState extends State<SingIn> {
                        (value) {
                         if (value!.isEmpty) {
                           return "email_empty".tr;
+                        }else if(!GetUtils.isEmail(value)){
+                          return "invalid_email".tr;
                         }
                         return null;
                       }, authenticationController.email,
@@ -111,7 +114,9 @@ class _SingInState extends State<SingIn> {
                           ],
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.toNamed(Routes.VERFICATION);
+                          },
                           child: Text(
                             "Forgot Password".tr,
                             style: GoogleFonts.inter(

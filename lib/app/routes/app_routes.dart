@@ -7,6 +7,7 @@ abstract class Routes {
   static const SPLASH_SCREEN = _Paths.SPLASH_SCREEN;
   static const AUTHENTICATION = _Paths.AUTHENTICATION;
   static const ON_BORDINING = _Paths.ON_BORDINING;
+  static const VERFICATION = _Paths.VERFICATION;
 }
 
 abstract class _Paths {
@@ -15,4 +16,5 @@ abstract class _Paths {
   static const SPLASH_SCREEN = '/splash-screen';
   static const AUTHENTICATION = '/authentication';
   static const ON_BORDINING = '/on-bordining';
+  static const VERFICATION = '/verfication';
 }

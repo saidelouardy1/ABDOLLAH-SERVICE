@@ -34,7 +34,14 @@ class TranslationApp implements Translations {
       "Success": "نجاح",
       "info" : "معلومات" ,
       "User successfully registered!" : "تم تسجيل المستخدم بنجاح!",
-      "The password or email provided for this user is incorrect" : "كلمة المرور أو البريد الإلكتروني المقدم لهذا المستخدم خاطئ"
+      "The password or email provided for this user is incorrect" : "كلمة المرور أو البريد الإلكتروني المقدم لهذا المستخدم خاطئ",
+      "Resset password" : "إعادة تعيين كلمة المرور",
+      "Please enter your email address to request a password reset" : "الرجاء إدخال عنوان بريدك الإلكتروني لطلب إعادة تعيين كلمة المرور",
+      "Verification code" :"رمز التحقق",
+      "please enter the verification code that has been sent to" : "الرجاء إدخال رمز التحقق الذي تم إرساله إلى",
+      "Next" : "التالي",
+      "Reinitialiser le passe" : "قم بإعادة تهيئة كلمة المرور",
+      "Please enter a new password" : "الرجاء إدخال كلمة مرور جديدة" 
     },
     "en" : {
       "name app" : "Abdollah services",
@@ -66,7 +73,14 @@ class TranslationApp implements Translations {
       "Success": "Success",
       "info" : "info" , 
       "User successfully registered!" : "User successfully registered!",
-      "The password or email provided for this user is incorrect" : "The password or email provided for this user is incorrect."
+      "The password or email provided for this user is incorrect" : "The password or email provided for this user is incorrect.",
+      "Resset password" : "Resset password",
+      "Please enter your email address to request a password reset" : "Please enter your email address to request a password reset",
+      "Verification code" : "Verification code",
+      "please enter the verification code that has been sent to" : "please enter the verification code that has been sent to",
+      "Next" : "Next",
+      "Reinitialiser le passe" : "Reinitialiser le passe",
+      "Please enter a new password" : "Please enter a new password" 
     },
     "fr" : {
       "name app" : "Abdollah services",
@@ -99,6 +113,13 @@ class TranslationApp implements Translations {
       "info" : "informations" , 
       "User successfully registered!" : "Utilisateur enregistré avec succès!" , 
       "The password or email provided for this user is incorrect" : "Le mot de passe ou l'e-mail fourni pour cet utilisateur est incorrect.",
+      "Resset password" : "Réinitialisation du mot de passe",
+      "Please enter your email address to request a password reset" : "Veuillez entrer votre adresse e-mail pour demander une réinitialisation du mot de passe",
+      "Verification code" : "Le code de vérification",
+      "please enter the verification code that has been sent to" : "veuillez saisir le code de vérification qui a été envoyé à",
+      "Next" : "le prochain",
+      "Reinitialiser le passe" : "Redémarrer le mot de passe",
+      "Please enter a new password" : "Veuillez entrer un nouveau mot de passe." 
     }
 
   };

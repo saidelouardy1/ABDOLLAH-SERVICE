@@ -45,5 +45,18 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>FacebookAppID</key>
+<string>your-facebook-app-id</string>
+<key>FacebookDisplayName</key>
+<string>your-app-display-name</string>
+<key>CFBundleURLTypes</key>
+<array>
+  <dict>
+    <key>CFBundleURLSchemes</key>
+    <array>
+      <string>fbyour-facebook-app-id</string>
+    </array>
+  </dict>
+</array>
 </dict>
 </plist>

@@ -1,4 +1,5 @@
 import 'package:abdollah_srevice/app/modules/OnBordining/bindings/on_bordining_binding.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:abdollah_srevice/app/modules/OnBordining/views/on_bordining_view.dart';
@@ -37,7 +38,7 @@ class SplashScreenController extends GetxController {
       _storage.write('isFirstInstallation', false);
       Get.offNamed(Routes.ON_BORDINING);
     } else {
-      Get.offNamed(Routes.AUTHENTICATION);
+     FirebaseAuth.instance.currentUser == null ? Get.offNamed(Routes.AUTHENTICATION) : Get.offNamed(Routes.HOME)  ;
     }
   }
 }
