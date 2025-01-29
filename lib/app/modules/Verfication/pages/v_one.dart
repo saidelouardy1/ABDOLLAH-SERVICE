@@ -86,7 +86,7 @@ class _Verfication_OneState extends State<Verfication_One> {
                     splashColor: Colors.transparent,
                     onPressed: () {
                       if(fromKey.currentState!.validate()){
-                        verficationController.sendOtpToEmail();
+                        verficationController.sendPasswordResetEmail(verficationController.email.text);
                       }
                     },
                     child: Padding(

@@ -38,7 +38,7 @@ class SplashScreenController extends GetxController {
       _storage.write('isFirstInstallation', false);
       Get.offNamed(Routes.ON_BORDINING);
     } else {
-     FirebaseAuth.instance.currentUser == null ? Get.offNamed(Routes.AUTHENTICATION) : Get.offNamed(Routes.HOME)  ;
+     FirebaseAuth.instance.currentUser == null ? Get.offNamed(Routes.AUTHENTICATION) : Get.offNamed(Routes.NAVIGATORBAR_BOTTOM)  ;
     }
   }
 }

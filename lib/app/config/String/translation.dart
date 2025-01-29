@@ -41,7 +41,11 @@ class TranslationApp implements Translations {
       "please enter the verification code that has been sent to" : "الرجاء إدخال رمز التحقق الذي تم إرساله إلى",
       "Next" : "التالي",
       "Reinitialiser le passe" : "قم بإعادة تهيئة كلمة المرور",
-      "Please enter a new password" : "الرجاء إدخال كلمة مرور جديدة" 
+      "Please enter a new password" : "الرجاء إدخال كلمة مرور جديدة" ,
+      "Home" : "الصفحة الرئيسية",  
+      "Chat" : "دردشة", 
+      "Description" : "الوصف", 
+      "Location" : "الموقع" 
     },
     "en" : {
       "name app" : "Abdollah services",
@@ -80,7 +84,11 @@ class TranslationApp implements Translations {
       "please enter the verification code that has been sent to" : "please enter the verification code that has been sent to",
       "Next" : "Next",
       "Reinitialiser le passe" : "Reinitialiser le passe",
-      "Please enter a new password" : "Please enter a new password" 
+      "Please enter a new password" : "Please enter a new password",
+       "Home" : "Home", 
+      "Chat" : "Chat", 
+      "Description" : "Description",  
+      "Location" : "Location"  
     },
     "fr" : {
       "name app" : "Abdollah services",
@@ -119,7 +127,11 @@ class TranslationApp implements Translations {
       "please enter the verification code that has been sent to" : "veuillez saisir le code de vérification qui a été envoyé à",
       "Next" : "le prochain",
       "Reinitialiser le passe" : "Redémarrer le mot de passe",
-      "Please enter a new password" : "Veuillez entrer un nouveau mot de passe." 
+      "Please enter a new password" : "Veuillez entrer un nouveau mot de passe.",
+      "Home" : "Accueil",  
+      "Chat" : "Chat", 
+      "Description" : "Description", 
+      "Location" : "Lieu"
     }
 
   };

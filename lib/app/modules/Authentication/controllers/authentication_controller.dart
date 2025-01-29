@@ -93,7 +93,7 @@ class AuthenticationController extends GetxController {
         email: email.text.trim(),
         password: password.text.trim(),
       );
-      Get.offNamed(Routes.HOME);
+      Get.offNamed(Routes.NAVIGATORBAR_BOTTOM);
     } on FirebaseAuthException catch (e) {
       String errorMessag = '';
       if (e.code == 'user-not-found') {
@@ -160,7 +160,7 @@ class AuthenticationController extends GetxController {
           'uid': uid,
           'token': googleAuth.accessToken,
         }, SetOptions(merge: true));
-        Get.offNamed(Routes.HOME);
+        Get.offNamed(Routes.NAVIGATORBAR_BOTTOM);
       }
     } catch (e) {
       print('Error during Google Sign-In: $e');
@@ -195,7 +195,7 @@ class AuthenticationController extends GetxController {
             'image': user.photoURL ?? '',
             'token': accessToken.tokenString,
           }, SetOptions(merge: true));
-          Get.offNamed(Routes.HOME);
+          Get.offNamed(Routes.NAVIGATORBAR_BOTTOM);
         }
       } else if (loginResult.status == LoginStatus.cancelled) {
         print("Facebook sign-in was cancelled.");

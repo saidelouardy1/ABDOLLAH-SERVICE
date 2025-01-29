@@ -17,5 +17,11 @@
   static const  right = "Assets/Icons_App/right.svg";
   static const  eayOpen = "Assets/Icons_App/eayOpen.svg";
   static const  eayeClose = "Assets/Icons_App/eayeClose.svg";
+
+  //  bottomnavigator bar
+  static const  chat = "Assets/Icons_App/chat.svg";
+  static const  discription = "Assets/Icons_App/discription.svg";
+  static const  home = "Assets/Icons_App/home.svg";
+  static const  location = "Assets/Icons_App/location.svg";
   
  }

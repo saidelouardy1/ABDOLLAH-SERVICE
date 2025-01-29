@@ -8,6 +8,10 @@ abstract class Routes {
   static const AUTHENTICATION = _Paths.AUTHENTICATION;
   static const ON_BORDINING = _Paths.ON_BORDINING;
   static const VERFICATION = _Paths.VERFICATION;
+  static const NAVIGATORBAR_BOTTOM = _Paths.NAVIGATORBAR_BOTTOM;
+  static const CHAT = _Paths.CHAT;
+  static const LOCATION = _Paths.LOCATION;
+  static const DISCREIPTION = _Paths.DISCREIPTION;
 }
 
 abstract class _Paths {
@@ -17,4 +21,8 @@ abstract class _Paths {
   static const AUTHENTICATION = '/authentication';
   static const ON_BORDINING = '/on-bordining';
   static const VERFICATION = '/verfication';
+  static const NAVIGATORBAR_BOTTOM = '/navigatorbar-bottom';
+  static const CHAT = '/chat';
+  static const LOCATION = '/location';
+  static const DISCREIPTION = '/discreiption';
 }
