@@ -23,5 +23,14 @@
   static const  discription = "Assets/Icons_App/discription.svg";
   static const  home = "Assets/Icons_App/home.svg";
   static const  location = "Assets/Icons_App/location.svg";
+
+  //////// home 
+  // svg
+  static const  pencil = "Assets/Icons_App/pencil.svg";
+  // png
+  static const  backgroundOne = "Assets/ImagesApp/backgroundOne.png";
+  static const  backgroundTow = "Assets/ImagesApp/backgroundTow.png";
+  static const  backgroundThree = "Assets/ImagesApp/backgroundThree.png";
+  
   
  }

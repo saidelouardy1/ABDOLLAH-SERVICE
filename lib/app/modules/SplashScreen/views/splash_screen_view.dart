@@ -9,8 +9,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../controllers/splash_screen_controller.dart';
 
 class SplashScreenView extends GetView<SplashScreenController> {
-   SplashScreenView({super.key});
-  SplashScreenController splashScreenController = Get.put(SplashScreenController());
+  SplashScreenView({super.key});
+  SplashScreenController splashScreenController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
