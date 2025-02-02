@@ -93,7 +93,7 @@ class AuthenticationController extends GetxController {
         email: email.text.trim(),
         password: password.text.trim(),
       );
-      Get.offNamed(Routes.NAVIGATORBAR_BOTTOM);
+      Get.offAllNamed(Routes.NAVIGATORBAR_BOTTOM);
     } on FirebaseAuthException catch (e) {
       String errorMessag = '';
       if (e.code == 'user-not-found') {
@@ -160,7 +160,7 @@ class AuthenticationController extends GetxController {
           'uid': uid,
           'token': googleAuth.accessToken,
         }, SetOptions(merge: true));
-        Get.offNamed(Routes.NAVIGATORBAR_BOTTOM);
+        Get.offAllNamed(Routes.NAVIGATORBAR_BOTTOM);
       }
     } catch (e) {
       print('Error during Google Sign-In: $e');
@@ -185,24 +185,31 @@ class AuthenticationController extends GetxController {
         final User? user = userCredential.user;
 
         if (user != null) {
+          // Fetch user data from Facebook
+          final userData = await FacebookAuth.instance.getUserData();
+          String fullName = userData['name'];
+          String email = userData['email'];
+          String profileImage = userData['picture']['data']['url'];
+
+          // Save user data including the profile image
           await FirebaseFirestore.instance
               .collection('users')
               .doc(user.uid)
               .set({
             'uid': user.uid,
-            'fullName': user.displayName ?? '',
-            'email': user.email ?? '',
-            'image': user.photoURL ?? '',
+            'fullName': fullName,
+            'email': email,
+            'image': profileImage,
             'token': accessToken.tokenString,
           }, SetOptions(merge: true));
-          Get.offNamed(Routes.NAVIGATORBAR_BOTTOM);
+
+          Get.offAllNamed(Routes.NAVIGATORBAR_BOTTOM);
         }
       } else if (loginResult.status == LoginStatus.cancelled) {
         print("Facebook sign-in was cancelled.");
       } else {
         print("Facebook sign-in failed. Please try again.");
       }
-      isLoading.value = false;
     } catch (e) {
       print("An error occurred: $e");
     } finally {

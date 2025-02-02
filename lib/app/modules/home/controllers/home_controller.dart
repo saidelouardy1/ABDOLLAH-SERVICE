@@ -1,14 +1,20 @@
 import 'dart:async';
 import 'package:abdollah_srevice/app/config/Assets/assets.dart';
+import 'package:abdollah_srevice/app/modules/home/service/firebase_service.dart';
 import 'package:abdollah_srevice/app/routes/app_pages.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 class HomeController extends GetxController {
+  final FirebaseService firebaseService = FirebaseService();
+  RxString photoUser = "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png".obs;
+  RxString userName = ''.obs;
+  RxString userEmail = ''.obs;
   RxInt currentIndex = 0.obs;
+  RxBool isLoading = false.obs;
+  RxBool isLoadingService = false.obs;
+  RxList<QueryDocumentSnapshot> AllService = <QueryDocumentSnapshot>[].obs;
   RxList image_PageViwe = [
     Images_Icon.background,
     Images_Icon.backgroundOne,
@@ -62,38 +68,13 @@ class HomeController extends GetxController {
     Images_Icon.Wallet,
     Images_Icon.Logout
   ].obs;
-
-  Future<void> signOut() async {
-    final user = FirebaseAuth.instance.currentUser;
-
-    if (user != null) {
-      try {
-        if (user.providerData
-            .any((element) => element.providerId == 'google.com')) {
-          GoogleSignIn googleSignIn = GoogleSignIn();
-          await googleSignIn.signOut();
-          await FirebaseAuth.instance.signOut();
-        }
-        else if (user.providerData
-            .any((element) => element.providerId == 'facebook.com')) {
-          final facebookLogin = FacebookAuth.instance;
-          await facebookLogin.logOut();
-          await FirebaseAuth.instance.signOut();
-        }
-        else if (user.providerData
-            .any((element) => element.providerId == 'password')) {
-          await FirebaseAuth.instance.signOut();
-        }
-        else if (user.providerData
-            .any((element) => element.providerId == 'apple.com')) {
-          await FirebaseAuth.instance.signOut();
-        }
-        Get.offAllNamed(Routes.AUTHENTICATION);
-      } catch (e) {
-        print('Error signing out: $e');
-      }
-    }
+///////////////////////////////////////////// firebase service
+ ///////////////////////////////// LogOut
+ void logout() async {
+    await firebaseService.signOut();
+    Get.offAllNamed(Routes.AUTHENTICATION);
   }
+
 
   @override
   void onReady() {
@@ -101,6 +82,8 @@ class HomeController extends GetxController {
     // Future.delayed(Duration(milliseconds: 100), () {
     //   startAutoScroll();
     // });
+     firebaseService.fetchDataUser();
+    firebaseService.fetchAllservice();
   }
 
   @override

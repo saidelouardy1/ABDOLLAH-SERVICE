@@ -1,8 +1,12 @@
-import 'package:abdollah_srevice/app/config/Assets/assets.dart';
+ import 'package:abdollah_srevice/app/config/Assets/assets.dart';
 import 'package:abdollah_srevice/app/config/Size/fontsized.dart';
+import 'package:abdollah_srevice/app/modules/Location/controllers/location_controller.dart';
 import 'package:abdollah_srevice/app/modules/Location/views/location_view.dart';
+import 'package:abdollah_srevice/app/modules/chat/controllers/chat_controller.dart';
 import 'package:abdollah_srevice/app/modules/chat/views/chat_view.dart';
+import 'package:abdollah_srevice/app/modules/discreiption/controllers/discreiption_controller.dart';
 import 'package:abdollah_srevice/app/modules/discreiption/views/discreiption_view.dart';
+import 'package:abdollah_srevice/app/modules/home/controllers/home_controller.dart';
 import 'package:abdollah_srevice/app/modules/home/views/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -22,14 +26,19 @@ class NavigatorbarBottomView extends GetView<NavigatorbarBottomController> {
       body: Obx(() {
         switch (navigatorBarController.selectedIndex.value) {
           case 0:
+            Get.put(HomeController());  
             return HomeView();
           case 1:
+          Get.put(ChatController());
             return ChatView();
           case 2:
+          Get.put(DiscreiptionController());
             return DiscreiptionView();
           case 3:
+          Get.put(LocationController());
             return LocationView();
           default:
+          Get.put(HomeController());
             return HomeView(); 
         }
       }),

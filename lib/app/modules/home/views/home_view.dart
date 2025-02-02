@@ -1,6 +1,7 @@
 import 'package:abdollah_srevice/app/config/Assets/assets.dart';
 import 'package:abdollah_srevice/app/config/Size/fontsized.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,12 +13,11 @@ class HomeView extends GetView<HomeController> {
 
   final HomeController homeController = Get.put(HomeController());
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      drawer: Drawer(
+      drawer: Obx(()=>Drawer(
         child: Container(
           color: Colors.white,
           padding: EdgeInsets.symmetric(vertical: 40, horizontal: 10),
@@ -32,12 +32,13 @@ class HomeView extends GetView<HomeController> {
                     children: [
                       CircleAvatar(
                         backgroundImage: NetworkImage(
-                            "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png"),
+                           homeController.photoUser.value
+                          ),
                         radius: 30,
                       ),
                       SizedBox(height: 8),
                       Text(
-                        'Said Elouardy',
+                        homeController.userName.value,
                         style: GoogleFonts.inter(
                             fontWeight: FontWeight.w700,
                             fontSize: Fontsized.DisplayMidume,
@@ -45,7 +46,7 @@ class HomeView extends GetView<HomeController> {
                       ),
                       SizedBox(height: 2),
                       Text(
-                        'saidelouardy@gmail.com',
+                        homeController.userEmail.value,
                         style: GoogleFonts.inter(
                             fontWeight: FontWeight.w300,
                             fontSize: Fontsized.SizedSmall,
@@ -69,7 +70,7 @@ class HomeView extends GetView<HomeController> {
                           break;
                           case 3 : print("pay");
                           break;
-                          case 4 : homeController.signOut();
+                          case 4 : homeController.logout();
                           break;
                         }
                       },
@@ -92,8 +93,14 @@ class HomeView extends GetView<HomeController> {
             ),
           ),
         ),
-      ),
-      body: SingleChildScrollView(
+      )),
+      body: Obx(()=>  homeController.isLoading.value
+      ? Center(
+        child: SpinKitCircle(
+          color: Colors.black,
+        ),
+      )
+      :SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.only(top: 35, bottom: 30),
           color: Colors.white,
@@ -118,7 +125,8 @@ class HomeView extends GetView<HomeController> {
                                   color: Colors.black, shape: BoxShape.circle),
                               child: CircleAvatar(
                                 backgroundImage: NetworkImage(
-                                    "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png"),
+                                    homeController.photoUser.value
+                                ),
                                 radius: 25,
                               ),
                             ),
@@ -212,7 +220,7 @@ class HomeView extends GetView<HomeController> {
                       onPageChanged: (value) =>
                           homeController.currentIndex.value = value,
                       itemBuilder: (context, index) {
-                        return Card(
+                        return  Card(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20)),
                           elevation: 3,
@@ -280,7 +288,7 @@ class HomeView extends GetView<HomeController> {
                   /////////////////////////////////////:: text card service
                   SizedBox(height: 10),
                   Padding(
-                    padding: const EdgeInsets.only(right: 15 , left: 15 , bottom: 8),
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: Row(
                       children: [
                         Text(
@@ -295,14 +303,23 @@ class HomeView extends GetView<HomeController> {
                     ),
                   ),
                   ///////////////////////////////////////// list view
-                  ListView.builder(
+                 Obx(
+                  ()=> homeController.isLoadingService.value
+                  ? SizedBox(
+                    height: Get.height/3,
+                    child: SpinKitCircle(
+                      color: Colors.black,
+                    ),
+                  )
+                  : ListView.builder(
                     shrinkWrap: true,
-                    itemCount: 10,
+                    itemCount: homeController.AllService.length,
                     physics: NeverScrollableScrollPhysics(),
                     itemBuilder: (context , index){
-                      return SizedBox(
+                      return Container(
                     width: Get.width,
                     height: 250,
+                    margin: EdgeInsets.only(bottom: 8),
                     child: Card(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)
@@ -330,7 +347,7 @@ class HomeView extends GetView<HomeController> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                "service",
+                                homeController.AllService[index]["Title"],
                                 style: GoogleFonts.inter(
                                   fontSize: Fontsized.fontsMidume,
                                   fontWeight: FontWeight.w600,
@@ -338,7 +355,7 @@ class HomeView extends GetView<HomeController> {
                                 ),
                                 ),
                                 Text(
-                                "service hhuhisqhiudshfoishfoishoihfisfhoishfoqihfoqhfoiqhf",
+                                homeController.AllService[index]["Description"],
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: GoogleFonts.inter(
@@ -386,19 +403,19 @@ class HomeView extends GetView<HomeController> {
                               ],
                             ),
                           ),
-                          SizedBox(height: 5)
                         ],
                       ),
                     ),
                   );
                     } 
                     )
+                 )
                 ],
               ),
             ),
           ),
         ),
-      ),
+      ),)
     );
   }
 }
