@@ -4,6 +4,7 @@ analyzer:
     camel_case_types: ignore
     constant_identifier_names: ignore
     deprecated_member_use: ignore
+    file_names: ignore
     must_be_immutable: ignore
     non_constant_identifier_names: ignore
     unnecessary_overrides: ignore

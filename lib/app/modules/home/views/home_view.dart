@@ -1,138 +1,404 @@
 import 'package:abdollah_srevice/app/config/Assets/assets.dart';
+import 'package:abdollah_srevice/app/config/Size/fontsized.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
-  const HomeView({super.key});
+  HomeView({super.key});
+
+  final HomeController homeController = Get.put(HomeController());
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-    HomeController homeController = Get.put(HomeController());
     return Scaffold(
-        body: SingleChildScrollView(
-      child: Container(
-        padding: EdgeInsets.only(top: 35, bottom: 30),
-        color: Colors.white,
-        width: Get.width,
-        height: Get.height,
-        child: Column(
-          children: [
-            Obx(() => Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  ////////////////////////////////// column two
+      key: scaffoldKey,
+      drawer: Drawer(
+        child: Container(
+          color: Colors.white,
+          padding: EdgeInsets.symmetric(vertical: 40, horizontal: 10),
+          width: Get.width,
+          height: Get.height,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
                   child: Column(
                     children: [
-                      //////////////////////////////// image with name
-                      Row(
-                        children: [
-                          Stack(
-                            clipBehavior: Clip.none,
-                            children: [
-                              Container(
-                                padding: EdgeInsets.all(2),
-                                decoration: BoxDecoration(
-                                    color: Colors.black,
-                                    shape: BoxShape.circle),
-                                child: CircleAvatar(
-                                  backgroundImage: NetworkImage(
-                                      "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png"),
-                                  radius: 25,
-                                ),
-                              ),
-                              Positioned(
-                                bottom: -5,
-                                right: -5,
-                                child: Container(
-                                  padding: EdgeInsets.all(5),
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      shape: BoxShape.circle),
-                                  child: SvgPicture.asset(
-                                    Images_Icon.pencil,
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ],
+                      CircleAvatar(
+                        backgroundImage: NetworkImage(
+                            "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png"),
+                        radius: 30,
                       ),
-                      //////////////////////////// page view
-                      SizedBox(height: 15),
-                      SizedBox(
-                        width: Get.width,
-                        height: 180,
-                        child: PageView.builder(
-                            itemCount: homeController.image_PageViwe.length,
-                            controller: homeController.pageController,
-                            onPageChanged: (value) =>
-                                homeController.currentIndex.value = value,
-                            itemBuilder: (context, index) {
-                              return Column(
-                                children: [
-                                  Card(
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
-                                    elevation: 3,
-                                    child: Container(
-                                      width: Get.width,
-                                      height: 170,
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 30),
-                                      decoration: BoxDecoration(
-                                          color: Colors.black,
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          image: DecorationImage(
-                                              image: AssetImage(homeController
-                                                  .image_PageViwe[index]),
-                                              fit: BoxFit.cover)),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'hi',
-                                          ),
-                                          Text('hi')
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              );
-                            }),
+                      SizedBox(height: 8),
+                      Text(
+                        'Said Elouardy',
+                        style: GoogleFonts.inter(
+                            fontWeight: FontWeight.w700,
+                            fontSize: Fontsized.DisplayMidume,
+                            color: Colors.black),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: List.generate(
-                          homeController.image_PageViwe.length,
-                          (index) => Obx(() => Container(
-                                width: 12,
-                                height: 12,
-                                margin: EdgeInsets.symmetric(
-                                    vertical: 5, horizontal: 5),
-                                decoration: BoxDecoration(
-                                  color:
-                                      homeController.currentIndex.value == index
-                                          ? Colors.black
-                                          : Colors.grey,
-                                  shape: BoxShape.circle,
-                                ),
-                              )),
-                        ),
-                      )
+                      SizedBox(height: 2),
+                      Text(
+                        'saidelouardy@gmail.com',
+                        style: GoogleFonts.inter(
+                            fontWeight: FontWeight.w300,
+                            fontSize: Fontsized.SizedSmall,
+                            color: Colors.black),
+                      ),
                     ],
                   ),
-                ))
-          ],
+                ),
+                SizedBox(height: 20),
+                Column(
+                  children: List.generate(
+                    5,
+                    (index) => ListTile(
+                      onTap: () {
+                        switch(index){
+                          case 0 : print("home");
+                          break;
+                          case 1 : print("update");
+                          break;
+                          case 2 : print("notife");
+                          break;
+                          case 3 : print("pay");
+                          break;
+                          case 4 : homeController.signOut();
+                          break;
+                        }
+                      },
+                      leading: SvgPicture.asset(
+                        homeController.Icons_title_Drawer[index],
+                        color: index == 4 ? Colors.red : Colors.black,
+                      ),
+                      title: Text(
+                        homeController.title_Drawer[index].tr,
+                        style: GoogleFonts.inter(
+                            fontWeight: FontWeight.w600,
+                            fontSize: Fontsized.fontsMidume,
+                            color: index == 4 ? Colors.red : Colors.black,
+                          ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
-    ));
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.only(top: 35, bottom: 30),
+          color: Colors.white,
+          width: Get.width,
+          height: Get.height,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      GestureDetector(
+                        onTap: () => scaffoldKey.currentState?.openDrawer(),
+                        child: Stack(
+                          clipBehavior: Clip.none,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(2),
+                              decoration: BoxDecoration(
+                                  color: Colors.black, shape: BoxShape.circle),
+                              child: CircleAvatar(
+                                backgroundImage: NetworkImage(
+                                    "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png"),
+                                radius: 25,
+                              ),
+                            ),
+                            Positioned(
+                              bottom: -5,
+                              right: -5,
+                              child: Container(
+                                padding: EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                    color: Colors.white, shape: BoxShape.circle),
+                                child: SvgPicture.asset(
+                                  Images_Icon.pencil,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      ///////////////////////////////////////// pop
+                      PopupMenuButton<int>(
+                        offset: Offset(0, 35),
+                        onSelected: (int value) {
+                          if (value == 1) {
+                            Get.updateLocale(Locale('ar'));
+                            Get.forceAppUpdate();
+                          } else if (value == 2) {
+                            Get.updateLocale(Locale('en'));
+                            Get.forceAppUpdate();
+                          } else if (value == 3) {
+                            Get.updateLocale(Locale('fr'));
+                            Get.forceAppUpdate();
+                          }
+                        },
+                        itemBuilder: (context) => [
+                          PopupMenuItem<int>(
+                            value: 1,
+                            child: Text(
+                              "Arabic".tr,
+                              style: GoogleFonts.plusJakartaSans(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: Fontsized.fontsMidume,
+                                  color: Colors.black),
+                            ),
+                          ),
+                          PopupMenuItem<int>(
+                            value: 2,
+                            child: Text(
+                              "English".tr,
+                              style: GoogleFonts.plusJakartaSans(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: Fontsized.fontsMidume,
+                                  color: Colors.black),
+                            ),
+                          ),
+                          PopupMenuItem<int>(
+                            value: 3,
+                            child: Text(
+                              "French".tr,
+                              style: GoogleFonts.plusJakartaSans(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: Fontsized.fontsMidume,
+                                  color: Colors.black),
+                            ),
+                          ),
+                        ],
+                        child: Row(
+                          children: [
+                            Text(
+                              "translation".tr,
+                              style: GoogleFonts.plusJakartaSans(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: Fontsized.fontsMidume,
+                                  color: Colors.black),
+                            ),
+                            SizedBox(width: 3),
+                            SvgPicture.asset(Images_Icon.translation),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 15),
+                  /////////////////////////////////////// page view
+                  SizedBox(
+                    width: Get.width,
+                    height: 180,
+                    child: PageView.builder(
+                      itemCount: homeController.image_PageViwe.length,
+                      controller: homeController.pageController,
+                      onPageChanged: (value) =>
+                          homeController.currentIndex.value = value,
+                      itemBuilder: (context, index) {
+                        return Card(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20)),
+                          elevation: 3,
+                          child: Container(
+                            width: Get.width,
+                            height: 170,
+                            padding: EdgeInsets.symmetric(horizontal: 30),
+                            decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(20),
+                              image: DecorationImage(
+                                image: AssetImage(
+                                    homeController.image_PageViwe[index]),
+                                opacity: 0.5,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  homeController.TextOne[index].tr,
+                                  style: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w800,
+                                      color: Colors.white,
+                                      fontSize: Fontsized.DisplayMidume),
+                                ),
+                                SizedBox(height: 10),
+                                Text(
+                                  homeController.TextTow[index].tr,
+                                  style: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w300,
+                                      color: Colors.white,
+                                      fontSize: Fontsized.DisplayMidume),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  //////////////////////////////////// move desing
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(
+                      homeController.image_PageViwe.length,
+                      (index) => Obx(
+                        () => Container(
+                          width: 12,
+                          height: 12,
+                          margin:
+                              EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+                          decoration: BoxDecoration(
+                            color: homeController.currentIndex.value == index
+                                ? Colors.black
+                                : Colors.grey,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  /////////////////////////////////////:: text card service
+                  SizedBox(height: 10),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 15 , left: 15 , bottom: 8),
+                    child: Row(
+                      children: [
+                        Text(
+                          'All services'.tr,
+                          textAlign: TextAlign.start,
+                          style: GoogleFonts.inter(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w600,
+                              fontSize: Fontsized.BodyMidume),
+                        ),
+                      ],
+                    ),
+                  ),
+                  ///////////////////////////////////////// list view
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: 10,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context , index){
+                      return SizedBox(
+                    width: Get.width,
+                    height: 250,
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)
+                      ),
+                      color: Colors.white,
+                      elevation: 4,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Container(
+                              width: Get.width,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                                image: DecorationImage(
+                                  image: AssetImage(Images_Icon.background),
+                                  fit: BoxFit.fill
+                              )
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                "service",
+                                style: GoogleFonts.inter(
+                                  fontSize: Fontsized.fontsMidume,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black
+                                ),
+                                ),
+                                Text(
+                                "service hhuhisqhiudshfoishfoishoihfisfhoishfoqihfoqhfoiqhf",
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: GoogleFonts.inter(
+                                  fontSize: Fontsized.DisplaySmall,
+                                  fontWeight: FontWeight.w300,
+                                  color: Colors.black
+                                ),
+                                ),
+                               Row(
+                                children: [
+                                  IconButton(
+                                    onPressed: (){},
+                                   icon: SvgPicture.asset(
+                                    Images_Icon.Calling,
+                                    width: 20,
+                                    height: 20,
+                                    ),
+                                  ),
+                                   Text(
+                                    'calling'.tr,
+                                    style: GoogleFonts.inter(
+                                      fontSize: Fontsized.DisplayMidume,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black
+                                    ),
+                                  ),
+                                  IconButton(
+                                    onPressed: (){},
+                                     icon: SvgPicture.asset(
+                                      Images_Icon.Heart,
+                                      width: 20,
+                                      height: 20,
+                                  )
+                                  ),
+                                  Text(
+                                    '1',
+                                    style: GoogleFonts.inter(
+                                      fontSize: Fontsized.DisplayMidume,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black
+                                    ),
+                                  )
+                                ],
+                               )
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: 5)
+                        ],
+                      ),
+                    ),
+                  );
+                    } 
+                    )
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

@@ -27,6 +27,16 @@
   //////// home 
   // svg
   static const  pencil = "Assets/Icons_App/pencil.svg";
+  static const  Calling = "Assets/Icons_App/Calling.svg";
+  static const  Logout = "Assets/Icons_App/Logout.svg";
+  static const  Setting = "Assets/Icons_App/Setting.svg";
+  static const  Wallet = "Assets/Icons_App/Wallet.svg";
+  static const  Notification = "Assets/Icons_App/Notification.svg";
+  static const  upate = "Assets/Icons_App/upate.svg";
+  static const  translation = "Assets/Icons_App/translation.svg";
+  static const  Heart = "Assets/Icons_App/Heart.svg";
+  
+  
   // png
   static const  backgroundOne = "Assets/ImagesApp/backgroundOne.png";
   static const  backgroundTow = "Assets/ImagesApp/backgroundTow.png";

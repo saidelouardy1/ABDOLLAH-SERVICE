@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 
 class DiscreiptionController extends GetxController {
-  //TODO: Implement DiscreiptionController
 
   final count = 0.obs;
   @override

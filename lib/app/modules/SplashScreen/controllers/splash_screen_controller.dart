@@ -1,8 +1,6 @@
-import 'package:abdollah_srevice/app/modules/OnBordining/bindings/on_bordining_binding.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:abdollah_srevice/app/modules/OnBordining/views/on_bordining_view.dart';
 import 'package:abdollah_srevice/app/routes/app_pages.dart';
 
 class SplashScreenController extends GetxController {
