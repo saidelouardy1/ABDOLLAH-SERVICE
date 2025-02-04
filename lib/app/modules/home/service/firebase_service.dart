@@ -7,68 +7,33 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 HomeController homeController = Get.find<HomeController>();
-
 class FirebaseService {
+  String currentId = FirebaseAuth.instance.currentUser!.uid;
 //////////////////////////////////////////////// fetch data user
-//   Future<void> fetchDataUser() async {
-//   homeController.isLoading.value = true;
-//   try {
-//     final uidUser = FirebaseAuth.instance.currentUser!.uid;
-//     QuerySnapshot userQuery = await FirebaseFirestore.instance .collection('users').where('uid', isEqualTo: uidUser).get();
-//     if (userQuery.docs.isNotEmpty) {
-//       var userDoc = userQuery.docs.first; 
-//       Map<String, dynamic> userData = userDoc.data() as Map<String, dynamic>;
-//       homeController.userName.value = userData['fullName'];
-//       homeController.userEmail.value = userData['email'];
-//       homeController.photoUser.value = userData['image'];
-//       print(userData);
-//     } else {
-//       print('No user is currently logged in');
-//     }
-//   } catch (e) {
-//     print('Error fetching user data: $e');
-//   } finally {
-//     homeController.isLoading.value = false;
-//   }
-// }
-
-
-Future<void> fetchDataUser() async {
-  try {
-    // Get the current user UID
-    final uidUser = FirebaseAuth.instance.currentUser?.uid;
-    
-    if (uidUser == null) {
-      print("No user logged in");
-      return;
+  Future<void> fetchDataUser() async {
+    homeController.isLoading.value = true;
+    try {
+      final uidUser = FirebaseAuth.instance.currentUser!.uid;
+      QuerySnapshot userQuery = await FirebaseFirestore.instance
+          .collection('users')
+          .where('uid', isEqualTo: uidUser)
+          .get();
+      if (userQuery.docs.isNotEmpty) {
+        var userDoc = userQuery.docs.first;
+        Map<String, dynamic> userData = userDoc.data() as Map<String, dynamic>;
+        homeController.userName.value = userData['fullName'];
+        homeController.userEmail.value = userData['email'];
+        homeController.photoUser.value = userData['image'];
+        print(userData);
+      } else {
+        print('No user is currently logged in');
+      }
+    } catch (e) {
+      print('Error fetching user data: $e');
+    } finally {
+      homeController.isLoading.value = false;
     }
-
-    // Fetch user data from Firestore using the UID
-    DocumentSnapshot userDoc = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(uidUser) // Use the UID to get the user's document
-        .get();
-
-    // Check if the document exists
-    if (userDoc.exists) {
-      var userData = userDoc.data() as Map<String, dynamic>;
-      String userName = userData['fullName'] ?? 'No name available';
-      String userEmail = userData['email'] ?? 'No email available';
-      String userImage = userData['image'] ?? 'https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png';
-
-      // Update the HomeController with the fetched data
-      homeController.userName.value = userName;
-      homeController.userEmail.value = userEmail;
-      homeController.photoUser.value = userImage;
-
-      print("User Data fetched: $userName, $userEmail, $userImage");
-    } else {
-      print("User document does not exist");
-    }
-  } catch (e) {
-    print('Error fetching user data: $e');
   }
-}
 
 //////////////////////////// fetch data  service
   Future<void> fetchAllservice() async {

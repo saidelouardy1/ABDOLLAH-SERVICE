@@ -35,6 +35,7 @@
   static const  upate = "Assets/Icons_App/upate.svg";
   static const  translation = "Assets/Icons_App/translation.svg";
   static const  Heart = "Assets/Icons_App/Heart.svg";
+  static const  heart_fille = "Assets/Icons_App/heartFill.svg";
   
   
   // png
