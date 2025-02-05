@@ -21,7 +21,7 @@ class SplashScreenController extends GetxController {
 
   void updateProgress() async {
     while (progress.value < 1.0) {
-      await Future.delayed(Duration(milliseconds: 300));
+      await Future.delayed(Duration(milliseconds: 200));
       progress.value += 0.05;
     }
     progress.value = 1.0;
@@ -36,7 +36,7 @@ class SplashScreenController extends GetxController {
       _storage.write('isFirstInstallation', false);
       Get.offAllNamed(Routes.ON_BORDINING);
     } else {
-     FirebaseAuth.instance.currentUser == null ? Get.offAllNamed(Routes.AUTHENTICATION) : Get.offAllNamed(Routes.NAVIGATORBAR_BOTTOM)  ;
+     FirebaseAuth.instance.currentUser == null ? Get.offAllNamed(Routes.AUTHENTICATION) : Get.offAllNamed(Routes.NAVIGATORBAR_BOTTOM);
     }
   }
 }

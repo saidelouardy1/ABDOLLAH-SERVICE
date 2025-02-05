@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 HomeController homeController = Get.find<HomeController>();
+
 class FirebaseService {
   String currentId = FirebaseAuth.instance.currentUser!.uid;
 //////////////////////////////////////////////// fetch data user
@@ -24,7 +25,6 @@ class FirebaseService {
         homeController.userName.value = userData['fullName'];
         homeController.userEmail.value = userData['email'];
         homeController.photoUser.value = userData['image'];
-        print(userData);
       } else {
         print('No user is currently logged in');
       }
@@ -36,6 +36,8 @@ class FirebaseService {
   }
 
 //////////////////////////// fetch data  service
+////
+
   Future<void> fetchAllservice() async {
     homeController.isLoadingService.value = true;
     try {
@@ -43,15 +45,39 @@ class FirebaseService {
           await FirebaseFirestore.instance.collection("AllService").get();
       if (querySnapshot.docs.isNotEmpty) {
         homeController.AllService.clear();
-        homeController.AllService.addAll(querySnapshot.docs);
-        print(homeController.AllService);
+        for (var doc in querySnapshot.docs) {
+          homeController.AllService.add(doc);
+          String currentId = FirebaseAuth.instance.currentUser!.uid;
+          List<dynamic> likes = doc['PersonWhoDoLikes'] ?? [];
+        }
       }
     } catch (e) {
       print("Error fetching services: $e");
-      homeController.isLoadingService.value = false;
     } finally {
       homeController.isLoadingService.value = false;
     }
+  }
+
+  Future<void> toggleLikeAndIncrementWonder(String serviceId) async {
+    final serviceRef = FirebaseFirestore.instance.collection("AllService").doc(serviceId);
+    await FirebaseFirestore.instance.runTransaction((transaction) async {
+      DocumentSnapshot serviceDoc = await transaction.get(serviceRef);
+      if (serviceDoc.exists) {
+        List<dynamic> likes = serviceDoc['PersonWhoDoLikes'] ?? [];
+        int currentWonderCount = serviceDoc['wonder'] ?? 0;
+        if (likes.contains(currentId)) {
+          transaction.update(serviceRef, {
+            'PersonWhoDoLikes': FieldValue.arrayRemove([currentId]),
+            'wonder': currentWonderCount > 0 ? currentWonderCount - 1 : 0,
+          });
+        } else {
+          transaction.update(serviceRef, {
+            'PersonWhoDoLikes': FieldValue.arrayUnion([currentId]),
+            'wonder': currentWonderCount + 1,
+          });
+        }
+      }
+    });
   }
 
 /////////////////// Log out

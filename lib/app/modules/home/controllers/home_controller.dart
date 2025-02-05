@@ -15,12 +15,12 @@ class HomeController extends GetxController {
   RxInt currentIndex = 0.obs;
   RxBool isLoading = false.obs;
   RxBool isLoadingService = false.obs;
-  RxInt likes = 0.obs;
   RxList<QueryDocumentSnapshot> AllService = <QueryDocumentSnapshot>[].obs;
-  RxList<String> AddIdUser = <String>[].obs;
-
-
-
+  var userLikes = <String, bool>{}.obs; 
+  void updateUserLikes(String serviceId, bool isLiked) {
+    userLikes[serviceId] = isLiked;
+  }
+ 
   RxList image_PageViwe = [
     Images_Icon.background,
     Images_Icon.backgroundOne,
@@ -79,35 +79,17 @@ class HomeController extends GetxController {
     }
   }
 
+  /////////////////////////
+  ///
+  
+  
+
+
+  ////////////////////////// logout
   void Logout() {
     firebaseService.signOut();
   }
-   
-  // Future<void> Dolikes(String idDocument) async {
-  //   CollectionReference servicesLikes = FirebaseFirestore.instance.collection('AllService');
-  //   String currentId = FirebaseAuth.instance.currentUser!.uid;
-  //   try {
-  //     DocumentSnapshot docSnapshot = await servicesLikes.doc(idDocument).get();
-  //     if (docSnapshot.exists) {
-  //       List<dynamic> likedUsers = docSnapshot['PersonWhoDoLikes'] ?? [];
-  //       if (likedUsers.contains(currentId)) {
-  //         await servicesLikes.doc(idDocument).update({
-  //           'wonder': FieldValue.increment(-1),
-  //           'PersonWhoDoLikes': FieldValue.arrayRemove([currentId])
-  //         });
-  //         print('Like removed successfully');
-  //       } else {
-  //         await servicesLikes.doc(idDocument).update({
-  //           'wonder': FieldValue.increment(1),
-  //           'PersonWhoDoLikes': FieldValue.arrayUnion([currentId])
-  //         });
-  //         print('Like added successfully');
-  //       }
-  //     }
-  //   } catch (e) {
-  //     print('Error updating like: $e');
-  //   }
-  // }
+ 
 
   @override
   void onInit() {
